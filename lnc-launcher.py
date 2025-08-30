@@ -4,6 +4,7 @@ from subprocess import call
 import os
 from terminaltexteffects.effects.effect_slide import Slide
 from terminaltexteffects.effects.effect_sweep import Sweep
+from terminaltexteffects.effects.effect_print import Print
 import random
 from tkinter import *
 
@@ -23,31 +24,13 @@ def splash_screen():
     splash.mainloop()
 
 def main():
-    os.system("title LIFE N' CRIME LAUNCHER") # --> yeah this will only work on windows i cba to figure out how to do this on linux or mac or any other os really so thats a TODO
-    print("\033[32mCOPYRIGHT ELT, Inc. 1998-2008")
-    print("\033[32mINITIALIZING KERNEL")
-    print("\033[32m-------------------")
-    time.sleep(0.3)
-    subprocess.run("cls" if os.name == "nt" else "clear", shell=True)
-    print("\033[32mCOPYRIGHT ELT, Inc. 1998-2008")
-    print("\033[32mINITIALIZING KERNEL")
-    print("\033[32m==-----------------")
-    time.sleep(0.1)
     subprocess.run('cls' if os.name == 'nt' else 'clear', shell=True)
     print("\033[32mCOPYRIGHT ELT, Inc. 1998-2008")
     print("\033[32mINITIALIZING KERNEL")
-    print("\033[32m======-------------")
-    time.sleep(0.2)
-    subprocess.run('cls' if os.name == 'nt' else 'clear', shell=True)
-    print("\033[32mCOPYRIGHT ELT, Inc. 1998-2008")
-    print("\033[32mINITIALIZING KERNEL")
-    print("\033[32m============------")
-    time.sleep(0.3)
-    subprocess.run('cls' if os.name == 'nt' else 'clear', shell=True)
-    print("\033[32mCOPYRIGHT ELT, Inc. 1998-2008")
-    print("\033[32mINITIALIZING KERNEL")
-    print("\033[32m==================-")
-    time.sleep(0.5)
+    load_effect = Print("===================")
+    with load_effect.terminal_output() as terminal:
+        for frame in load_effect:
+            terminal.print(frame)
     subprocess.run('cls' if os.name == 'nt' else 'clear', shell=True)
     print("\033[32mCOPYRIGHT ELT, Inc. 1998-2008")
     print("\033[32mKERNEL INITIALIZED")
@@ -119,8 +102,14 @@ def elt_cnsl():
         elt_cnsl()
     if command == "shutdown":
         print("\033[32mShutting down...")
-        time.sleep(2)
+        time.sleep(1)
         exit()
+    if command == "restart":
+        print("\033[32mRestarting...")
+        time.sleep(1)
+        subprocess.run('cls' if os.name == 'nt' else 'clear', shell=True)
+        time.sleep(2)
+        main()
     else:
         print("\033[32mIncorrect command, check for typos and try again...")
         elt_cnsl()
@@ -135,6 +124,7 @@ def help():
     print("\033[32m  + launch [program] - launches a program")
     print("\033[32m  + info             - system information")
     print("\033[32m  + shutdown         - shutdown computer")
+    print("\033[32m  + restart          - restart computer")
     print("\033[32m- Available programs:")
     print("\033[32m  + lnc              - 'life 'n crime computer game'")
     print("\033[32m  + assistant        - 'elt ai assistant powered by General Intelligence'")
@@ -197,4 +187,5 @@ def lnc_console():
 
 #######################################################################################################
 
+os.system("title LIFE N' CRIME LAUNCHER") # --> yeah this will only work on windows i cba to figure out how to do this on linux or mac or any other os really so thats a TODO
 splash_screen()
