@@ -181,6 +181,14 @@ def lnc_console():
         print("\033[32mSorry! This menu is under construction....")
         input("\033[32mPress any key to return to the Life n' Crime menu...")
         lnc_console()
+    if lnc_command == "credits":
+        credits_file = open('credits.txt', 'r')
+        credits = credits_file.read()
+        print("")
+        print("\033[32m" + credits)
+        print("")
+        credits_file.close()
+        lnc_console()
     if lnc_command == "exit":
         mainmenu()
     else:
