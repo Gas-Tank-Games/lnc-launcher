@@ -1,6 +1,5 @@
 import time
 import subprocess
-from subprocess import call
 import os
 from terminaltexteffects.effects.effect_slide import Slide
 from terminaltexteffects.effects.effect_sweep import Sweep
