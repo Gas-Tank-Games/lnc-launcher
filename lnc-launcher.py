@@ -1,11 +1,13 @@
 import time
 import subprocess
 import os
+import sys
 from terminaltexteffects.effects.effect_slide import Slide
 from terminaltexteffects.effects.effect_sweep import Sweep
 from terminaltexteffects.effects.effect_print import Print
 import random
 from tkinter import *
+from Color_Console import *
 
 def splash_screen():
     splash = Tk()
@@ -129,8 +131,8 @@ def help():
     print("\033[32m  + assistant        - 'elt ai assistant powered by General Intelligence'")
     print("\033[32m  + file manager     - 'elt os filemanager'")
     print("")
-    print("\033[32mAll ENVRUN affiliated PC's now support the HeadlineFetch™ feature!")
-    print("\033[32mType 'headline' in your console, to see a random headline from today's news!")
+    print("\033[35mAll ENVRUN affiliated PC's now support the \033[33mHeadlineFetch™\033[35m feature!")
+    print("\033[35mType 'headline' in your console, to see a random headline from today's news!")
     print("")
     elt_cnsl()
 
@@ -186,5 +188,11 @@ def lnc_console():
 
 #######################################################################################################
 
-os.system("title LIFE N' CRIME LAUNCHER") # --> yeah this will only work on windows i cba to figure out how to do this on linux or mac or any other os really so thats a TODO
+if os.name == 'nt':
+    os.system("title LIFE N' CRIME LAUNCHER")
+else:
+    sys.stdout.write("\x1b]2;LIFE N' CRIME LAUNCHER\x07")
+color(bg = "black")
+subprocess.run('cls' if os.name == 'nt' else 'clear', shell=True)
+print("!!!DO NOT CLOSE THIS WINDOW!!!!")
 splash_screen()

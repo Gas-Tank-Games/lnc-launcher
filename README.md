@@ -11,7 +11,7 @@ remember that the executable should always be in the same directory as `launcher
 
 ## Credits
 
-all the code is written by me itsnotaz but i wanna thank python, terminaltexteffects, pyinstaller and tkinter for existing...
+all the code is written by me itsnotaz but i wanna thank python, terminaltexteffects, color-console, pyinstaller and tkinter for existing...
 
 **links**:
 - https://www.python.org/ --> pretty sure u already knew that one lol

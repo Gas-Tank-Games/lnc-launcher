@@ -11,3 +11,4 @@ print("lnc launcher built")
 # - pyinstaller
 # - tkinter
 # - terminal text effects
+# - Color-Console
