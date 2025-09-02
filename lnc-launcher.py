@@ -159,7 +159,8 @@ def lnc_console():
     if lnc_command == "story-mode":
         print("\033[32mLaunching Life n' Crime Story Mode...")
         time.sleep(1)
-        subprocess.run("start files/lnc.exe -iwad gamefiles.ipk3" if os.name == "nt" else "", shell=True) # TODO: WRITE THE LINUX ONE AND MAC ONE
+        subprocess.run("start files/lnc.exe -iwad gamefiles.ipk3 -is_launcher_launched" if os.name == "nt" else "", shell=True) # TODO: WRITE THE LINUX ONE AND MAC ONE
+        # if ur making ur own custom launcher u need to also use the -is_launcher_launched arguement and you can bite me about that...
         exit()
     if lnc_command == "online-mode":
         print("\033[32mSorry! This menu is under construction....")
