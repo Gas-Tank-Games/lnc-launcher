@@ -61,17 +61,17 @@ def mainmenu():
     
 def elt_cnsl():
     command = input("\033[32mELT-CNSL:")
-    if command == "help":
+    if command.lower() == "help":
         help()
-    if command == "launch lnc":
+    if command.lower() == "launch lnc":
         lnc()
-    if command == "launch assistant":
+    if command.lower() == "launch assistant":
         print("\033[32mWe are extremely sorry, but this program is under maintenance, please try again later...")
         elt_cnsl()
-    if command == "launch":
+    if command.lower() == "launch":
         print("\033[32mIncorrect usage of 'launch', use the 'help' command to see the list of available programs...")
         elt_cnsl()
-    if command == "headline":
+    if command.lower() == "headline":
         headline_id = random.randint(1, 10) 
         match headline_id:
             case 1:
@@ -98,14 +98,14 @@ def elt_cnsl():
             case _:
                 print("\033[0mError retrieving headline... Please try again later...")
         elt_cnsl()
-    if command == "info":
+    if command.lower() == "info":
         print("\033[32mWe are extremely sorry, but this program is under maintenance, please try again later...")
         elt_cnsl()
-    if command == "shutdown":
+    if command.lower() == "shutdown":
         print("\033[32mShutting down...")
         time.sleep(1)
         exit()
-    if command == "restart":
+    if command.lower() == "restart":
         print("\033[32mRestarting...")
         time.sleep(1)
         subprocess.run('cls' if os.name == 'nt' else 'clear', shell=True)
@@ -149,6 +149,7 @@ def lnc_main():
     print("\033[32mTo launch life n' crime story mode type 'story-mode' and hit ENTER.")
     print("\033[32mTo launch life n' crime multiplayer type 'online-mode' and hit ENTER.")
     print("\033[32mTo launch life n' crime mod content type 'mods' and hit ENTER.")
+    print("\033[32mTo setup/configure the life n' crime gamejolt integration type 'gamejolt' and hit ENTER.")
     print("\033[32mFor launch options type 'options' and hit ENTER.")
     print("\033[32mTo see the life n' crime credits type 'credits' and hit ENTER.")
     print("\033[32mTo exit life n' crime type 'exit' and hit ENTER.")
@@ -156,24 +157,49 @@ def lnc_main():
 
 def lnc_console():   
     lnc_command = input("LNC-CNSL:")
-    if lnc_command == "story-mode":
+    if lnc_command.lower() == "story-mode":
         print("\033[32mLaunching Life n' Crime Story Mode...")
         time.sleep(1)
-        subprocess.run("start files/lnc.exe -iwad gamefiles.ipk3 -is_launcher_launched" if os.name == "nt" else "", shell=True) # TODO: WRITE THE LINUX ONE AND MAC ONE
+        extras = ""
+        if os.path.getsize("files/lnc_gj_credts") > 0:
+            extras = extras + " -gamejolt"
+        subprocess.run("start files/lnc.exe -iwad gamefiles.ipk3 -is_launcher_launched" + extras if os.name == "nt" else "", shell=True) # TODO: WRITE THE LINUX ONE AND MAC ONE
         # if ur making ur own custom launcher u need to also use the -is_launcher_launched arguement and you can bite me about that...
         exit()
-    if lnc_command == "online-mode":
+    if lnc_command.lower() == "online-mode":
         print("\033[32mSorry! This menu is under construction....")
         lnc_console()
-    if lnc_command == "mods":
-        print("\033[32mSorry! This menu is under construction....")
-        input("\033[32mPress any key to return to the Life n' Crime menu...")
-        lnc_console()
-    if lnc_command == "options":
+    if lnc_command.lower() == "mods":
         print("\033[32mSorry! This menu is under construction....")
         input("\033[32mPress any key to return to the Life n' Crime menu...")
         lnc_console()
-    if lnc_command == "credits":
+    if lnc_command.lower() == "gamejolt":
+        gj_want = input("\033[32mDo you want Life n' Crime to integrate with your GameJolt Account (Y/N/Cancel):")
+        if gj_want.lower() == "y":
+            print("\033[32mIf you input the following information wrong, Life n' Crime will crash on startup until i write a better ux experience lol...")
+            print("\033[32mBtw! Worry Not! We will not collect nor store your gamejolt login information anywhere but locally on your computer.")
+            print("\033[32mGas Tank Games is not affiliated with GameJolt in any way, shape or form.")
+            gj_username = input("\033[32mEnter your GameJolt username:")
+            gj_token = input("\033[32mEnter your GameJolt game token:")
+            with open("files/lnc_gj_credts", "w") as gj_creds:
+                gj_creds.truncate(0)
+                gj_creds.write(gj_username +"\n")
+                gj_creds.write(gj_token)
+                gj_creds.close()
+            print("\033[32mGameJolt settings updated!")
+            lnc_console()
+        if gj_want.lower() == "n":
+            with open("files/lnc_gj_credts", "r+") as gj_creds:
+                gj_creds.truncate(0)
+                gj_creds.close()
+            lnc_console()
+        else:
+            lnc_console()
+    if lnc_command.lower() == "options":
+        print("\033[32mSorry! This menu is under construction....")
+        input("\033[32mPress any key to return to the Life n' Crime menu...")
+        lnc_console()
+    if lnc_command.lower() == "credits":
         credits_file = open('credits.txt', 'r')
         credits = credits_file.read()
         print("")
@@ -181,7 +207,7 @@ def lnc_console():
         print("")
         credits_file.close()
         lnc_console()
-    if lnc_command == "exit":
+    if lnc_command.lower() == "exit":
         mainmenu()
     else:
         print("\033[32mIncorrect command...")
