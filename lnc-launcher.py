@@ -153,6 +153,9 @@ def lnc_main():
     print("\033[32mFor launch options type 'options' and hit ENTER.")
     print("\033[32mTo see the life n' crime credits type 'credits' and hit ENTER.")
     print("\033[32mTo exit life n' crime type 'exit' and hit ENTER.")
+    print("")
+    print("\033[32mPlease note that when playing with mods loaded, Gamejolt integration is disabled...")
+    print("")
     lnc_console()
 
 def lnc_console():   
@@ -161,8 +164,10 @@ def lnc_console():
         print("\033[32mLaunching Life n' Crime Story Mode...")
         time.sleep(1)
         extras = ""
-        if os.path.getsize("files/lnc_gj_credts") > 0:
-            extras = extras + " -gamejolt"
+        if os.path.exists("lnc_gj_credts"):
+            if os.path.getsize("lnc_gj_credts") > 0:
+                print("\033[32mPlugging gamejolt integration...")
+                extras = extras + " -gamejolt"
         subprocess.run("start files/lnc.exe -iwad gamefiles.ipk3 -is_launcher_launched" + extras if os.name == "nt" else "", shell=True) # TODO: WRITE THE LINUX ONE AND MAC ONE
         # if ur making ur own custom launcher u need to also use the -is_launcher_launched arguement and you can bite me about that...
         exit()
@@ -181,7 +186,7 @@ def lnc_console():
             print("\033[32mGas Tank Games is not affiliated with GameJolt in any way, shape or form.")
             gj_username = input("\033[32mEnter your GameJolt username:")
             gj_token = input("\033[32mEnter your GameJolt game token:")
-            with open("files/lnc_gj_credts", "w") as gj_creds:
+            with open("lnc_gj_credts", "w") as gj_creds:
                 gj_creds.truncate(0)
                 gj_creds.write(gj_username +"\n")
                 gj_creds.write(gj_token)
@@ -189,9 +194,10 @@ def lnc_console():
             print("\033[32mGameJolt settings updated!")
             lnc_console()
         if gj_want.lower() == "n":
-            with open("files/lnc_gj_credts", "r+") as gj_creds:
-                gj_creds.truncate(0)
-                gj_creds.close()
+            with open("lnc_gj_credts", "r+") as gj_creds:
+                if os.path.exists("lnc_gj_credts"):
+                    gj_creds.truncate(0)
+                    gj_creds.close()
             lnc_console()
         else:
             lnc_console()
