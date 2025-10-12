@@ -128,6 +128,7 @@ def help():
     print("\033[32m  + restart          - restart computer")
     print("\033[32m- Available programs:")
     print("\033[32m  + lnc              - 'life 'n crime computer game'")
+    print("\033[32m  + youtopia         - 'the most modern edutainment game of the 90's'")
     print("\033[32m  + assistant        - 'elt ai assistant powered by General Intelligence'")
     print("\033[32m  + file manager     - 'elt os filemanager'")
     print("")
@@ -146,6 +147,8 @@ def lnc():
 def lnc_main(): 
     print("\033[32mCOPYRIGHT Gas Tank Games 2025")
     print("")
+    print("\033[32mThis version of the launcher is designed to work with LIFE N' CRIME DEMO 1")
+    print("")
     print("\033[32mTo launch life n' crime story mode type 'story-mode' and hit ENTER.")
     print("\033[32mTo launch life n' crime multiplayer type 'online-mode' and hit ENTER.")
     print("\033[32mTo launch life n' crime mod content type 'mods' and hit ENTER.")
@@ -155,6 +158,7 @@ def lnc_main():
     print("\033[32mTo exit life n' crime type 'exit' and hit ENTER.")
     print("")
     print("\033[32mPlease note that when playing with mods loaded, Gamejolt integration is disabled...")
+    print("\033[32mAlso, multiplayer is pretty bare-bones as of now, missing tons of planned maps, modes and most of the GameJolt integration stuff...")
     print("")
     lnc_console()
 
@@ -168,11 +172,12 @@ def lnc_console():
             if os.path.getsize("lnc_gj_credts") > 0:
                 print("\033[32mPlugging gamejolt integration...")
                 extras = extras + " -gamejolt"
-        subprocess.run("start files/lnc.exe -iwad gamefiles.ipk3 -is_launcher_launched" + extras if os.name == "nt" else "", shell=True) # TODO: WRITE THE LINUX ONE AND MAC ONE
+        subprocess.run("start files/lnc.exe -iwad gamefiles.ipk3 -is_launcher_launched +multiplayer_current_mode 0 +r_deathcamera false" + extras if os.name == "nt" else "", shell=True) # TODO: WRITE THE LINUX ONE AND MAC ONE
         # if ur making ur own custom launcher u need to also use the -is_launcher_launched arguement and you can bite me about that...
         exit()
     if lnc_command.lower() == "online-mode":
-        print("\033[32mSorry! This menu is under construction....")
+        print("\033[32mLaunching life n' crime online launcher...")
+        subprocess.run("start lnc_mp.exe" + extras if os.name == "nt" else "", shell=True) # TODO: WRITE THE LINUX ONE AND MAC ONE
         lnc_console()
     if lnc_command.lower() == "mods":
         print("\033[32mSorry! This menu is under construction....")
@@ -181,8 +186,6 @@ def lnc_console():
     if lnc_command.lower() == "gamejolt":
         gj_want = input("\033[32mDo you want Life n' Crime to integrate with your GameJolt Account (Y/N/Cancel):")
         if gj_want.lower() == "y":
-            print("\033[32mIf you input the following information wrong, Life n' Crime will crash on startup until i write a better ux experience lol...")
-            print("\033[32mBtw! Worry Not! We will not collect nor store your gamejolt login information anywhere but locally on your computer.")
             print("\033[32mGas Tank Games is not affiliated with GameJolt in any way, shape or form.")
             gj_username = input("\033[32mEnter your GameJolt username:")
             gj_token = input("\033[32mEnter your GameJolt game token:")

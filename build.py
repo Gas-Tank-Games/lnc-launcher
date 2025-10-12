@@ -3,7 +3,8 @@ import PyInstaller.__main__
 
 print("build started")
 PyInstaller.__main__.run(["lnc-launcher.py", "--windowed", "--onefile", "--console", "--icon=icon.ico"])
-print("lnc launcher built")
+PyInstaller.__main__.run(["lnc_mp.py", "--windowed", "--onefile", "--console", "--icon=icon.ico"])
+print("lnc sp and mp launcher built")
 
 # dependencies required
 #

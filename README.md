@@ -1,7 +1,7 @@
 # lnc-launcher
 
 ## About
-Launcher component for the videogame Life n' Crime.
+Launcher component for the videogame Life n' Crime which also contains other supplementary content.
 
 ## Building
 
@@ -11,9 +11,10 @@ remember that the executable should always be in the same directory as `launcher
 
 ## Credits
 
-all the code is written by me itsnotaz but i wanna thank python, terminaltexteffects, color-console, pyinstaller and tkinter for existing...
+all the code is written by me itsnotaz but i wanna thank python, pygame, terminaltexteffects, color-console, pyinstaller and tkinter for existing...
 
 **links**:
 - https://www.python.org/ --> pretty sure u already knew that one lol
 - https://github.com/ChrisBuilds/terminaltexteffects
 - https://github.com/pyinstaller/pyinstaller
+- https://www.pygame.org/docs/
