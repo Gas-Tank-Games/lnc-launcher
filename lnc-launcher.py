@@ -177,7 +177,7 @@ def lnc_console():
         exit()
     if lnc_command.lower() == "online-mode":
         print("\033[32mLaunching life n' crime online launcher...")
-        subprocess.run("start lnc_mp.exe" + extras if os.name == "nt" else "", shell=True) # TODO: WRITE THE LINUX ONE AND MAC ONE
+        subprocess.run("start lnc_mp.exe" if os.name == "nt" else "", shell=False) # TODO: WRITE THE LINUX ONE AND MAC ONE
         lnc_console()
     if lnc_command.lower() == "mods":
         print("\033[32mSorry! This menu is under construction....")
