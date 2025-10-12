@@ -1,3 +1,7 @@
 /youtopia_python
 /launcher_files/youtopia
 README-draft.md
+build
+dist
+lnc-launcher.spec
+lnc_mp.spec
