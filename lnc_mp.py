@@ -154,9 +154,7 @@ class MainMenuPage(Page):
 
 class GJErrorPage(Page):
     def enter(self):
-        self.buttons = [
-            Button(pygame.Rect(400, 700, 200, 60), "Exit", lambda: quit(), button_font, button_image, click_sound),
-        ]
+        self.buttons = []
     def draw(self, surface):
         tile_width, tile_height = tile_image.get_width(), tile_image.get_height()
         for x in range(0, WIDTH, tile_width):
@@ -169,6 +167,7 @@ class GJErrorPage(Page):
         surface.blit(gjerror_label, (40, 500))
         surface.blit(errorinfo_label, (200, 540))
         super().draw(surface)
+        
 class ModeSelectPage(Page):
     def enter(self):
         self.buttons = [
