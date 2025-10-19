@@ -230,7 +230,7 @@ class RusHostPage(Page):
             playernum += 1
     def host(self):
         global playernum
-        subprocess.run("start files/lnc.exe -iwad gamefiles.ipk3 -is_launcher_launched -gamejolt -host " + str(playernum) + " -deathmatch -port " + str(self.port_field.get_text()) + " +map rus01 +multiplayer_current_mode 3 +r_deathcamera true" if os.name == "nt" else "", shell=True)
+        subprocess.run("start files/lnc.exe -iwad gamefiles.ipk3 -is_launcher_launched -gamejolt -host " + str(playernum) + " -deathmatch -port " + str(self.port_field.get_text()) + " +map rus01 +multiplayer_current_mode 3 +r_deathcamera true +sv_noautomap true +sv_nocrouch true +sv_nojump true" if os.name == "nt" else "", shell=True)
     #def toggle_netmode (self): 
     #    global netmode
     #    global netmodetext
